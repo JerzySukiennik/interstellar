@@ -1,0 +1,25 @@
+# Interstellar
+
+A first-person browser game in eight chapters: waking alone on a spinning ship, a flight to a water world where every second costs a month, the years that pass while you are gone, a fall into a black hole, and a lattice built from your own recorded past.
+
+Play: https://interstellar.gzowo.fun
+
+This is a fan-made, non-commercial project. It is not affiliated with or endorsed by the makers of the film that inspired it. The story, characters, text, models and code are original; nothing from the film (footage, stills, dialogue, music) is included.
+
+## Running it
+
+No build step. Serve the folder with any static server and open `index.html` in a recent Chrome on a computer with a dedicated graphics card. Keyboard and mouse or a gamepad; the controls screen is in the pause menu.
+
+## Built with
+
+- [three.js](https://threejs.org) r187 (MIT), vendored in `vendor/three`.
+- Plain ES modules, no dependencies to install.
+
+## Credits and licences
+
+- Music: Scott Buckley, CC BY 4.0 (https://www.scottbuckley.com.au). Track list and sources in `assets/licenses/audio.md`.
+- Sound effects: freesound.org contributors, CC0 1.0 unless listed otherwise, and NASA public-domain recordings. Every file is listed in `assets/licenses/audio.md`.
+- Typeface: B612 Mono, SIL Open Font License (`assets/fonts/OFL.txt`).
+- Display graphics notes: `assets/licenses/displays.md`.
+
+Each `vN` folder is a frozen copy of an earlier release.
