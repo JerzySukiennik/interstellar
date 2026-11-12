@@ -13,6 +13,7 @@ import { Settings } from './core/settings.js';
 import { Menu, PauseControl, startScreen } from './core/menu.js';
 import { Coop } from './core/coop.js';
 import { probe, openLan } from './core/net.js';
+import { CloudLink, CLOUD, CODE, newCode, cleanCode, inviteLink } from './core/cloud.js';
 
 const params = new URLSearchParams(location.search);
 const auto = params.get('auto') === '1';
@@ -389,12 +390,14 @@ async function main() {
   const persist = () => { if (ctx.director.current) history.save(ctx.state); };
   addEventListener('visibilitychange', () => { if (document.hidden) persist(); });
   addEventListener('pagehide', persist);
+  addEventListener('pagehide', () => ctx.net?.link.bye?.());
+  window.__link = () => { const n = ctx.net, L = n?.link; return n ? { role: n.role, room: L.code || null, open: L.open, linked: n.linked, direct: !!L.direct, error: L.error || null, stats: L.stats, log: L.log || [] } : null; };
   if (hud) setInterval(() => ui.hud(hudText(ctx)), 250);
 
   if (auto) {
     ctx.bot = new Bot(ctx);
     ctx.autoplay = opts => autoplay(ctx, opts);
-    ctx.coop = opts => { ctx.net?.close(); ctx.net = new Coop(ctx, opts); return ctx.net; };
+    ctx.coop = opts => { ctx.net?.close(); ctx.net = new Coop(ctx, opts?.room ? { ...opts, link: new CloudLink({ role: opts.role || 'host', code: opts.room, fetch: opts.fetch, direct: opts.direct !== false }) } : opts); return ctx.net; };
     window.__game = ctx;
   }
   engine.start();
@@ -403,8 +406,8 @@ async function main() {
   if (!auto) {
     await ui.loading(false);
     menu = ctx.menu = new Menu(ui, input, { settings });
-    const info = await probe();
-    const choice = await startScreen(menu, { save: restored.src === 'save', coop: info ? lobby(ctx, info) : null });
+    const info = location.protocol === 'https:' ? null : await probe();
+    const choice = await startScreen(menu, { save: restored.src === 'save', coop: lobby(ctx, info), join: cleanCode(params.get('join')) });
     const pick = choice === 'host' ? (restored.src === 'save' ? 'continue' : 'begin') : choice === 'join' ? 'begin' : choice;
     if (input.device !== 'pad') input.lock();
     const fresh = pick === 'new' && chapter !== ORDER[0];
@@ -438,20 +441,32 @@ async function main() {
 }
 
 function lobby(ctx, info) {
-  const st = { opening: false, addresses: [], port: info.port };
+  const st = { mode: null, opening: false, addresses: [], port: info?.port ?? 0, code: '' };
+  const keep = { get: k => { try { return sessionStorage.getItem(k) || ''; } catch { return ''; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} } };
+  const room = (role, code) => { st.mode = 'net'; st.code = code; keep.set(`interstellar.${role}`, code); ctx.net = new Coop(ctx, { role, link: new CloudLink({ role, code }) }); };
   return {
-    canHost: !!info.local,
-    async host() {
-      st.opening = true;
-      if (!ctx.net) ctx.net = new Coop(ctx, { role: 'host' });
+    canHost: !info || !!info.local,
+    lan: !!info?.local,
+    relay: !!info && !info.local,
+    remembered: () => cleanCode(keep.get('interstellar.guest')),
+    async host(mode = 'net') {
+      if (ctx.net) return;
+      if (mode !== 'lan') { const old = cleanCode(keep.get('interstellar.host')); room('host', old.length === CODE.length ? old : newCode()); return; }
+      st.mode = 'lan'; st.opening = true;
+      ctx.net = new Coop(ctx, { role: 'host' });
       const r = await openLan('', true);
       st.addresses = r?.addresses || []; st.port = r?.port || info.port; st.opening = false;
     },
-    join() { if (!ctx.net) ctx.net = new Coop(ctx, { role: 'guest' }); },
-    leave() { const host = ctx.net?.host; ctx.net?.close(); ctx.net = null; if (host) openLan('', false); },
+    join(code) {
+      if (ctx.net) return;
+      if (this.relay) { st.mode = 'lan'; ctx.net = new Coop(ctx, { role: 'guest' }); } else room('guest', cleanCode(code));
+    },
+    leave() { const lanHost = st.mode === 'lan' && ctx.net?.host; ctx.net?.close(); ctx.net = null; st.mode = null; if (lanHost) openLan('', false); },
+    async copy() { try { await navigator.clipboard.writeText(inviteLink(st.code)); return true; } catch { return false; } },
     status() {
-      const n = ctx.net;
-      return { opening: st.opening, addresses: st.addresses, port: st.port, open: !!n?.link.open, linked: !!n?.linked, error: n?.link.error || null, started: !!n && !n.host && n.linked && !!n.fact('at') };
+      if (st.mode === 'net' && ctx.net?.host && ctx.net.link.error === 'taken') { ctx.net.close(); ctx.net = null; room('host', newCode()); }
+      const n = ctx.net, L = n?.link;
+      return { mode: st.mode, opening: st.opening, addresses: st.addresses, port: st.port, code: st.code, site: CLOUD.site, open: !!L?.open, linked: !!n?.linked, direct: !!L?.direct, error: L?.error || null, started: !!n && !n.host && n.linked && !!n.fact('at') };
     },
   };
 }

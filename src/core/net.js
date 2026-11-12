@@ -105,7 +105,7 @@ export class Link {
 
 export class Track {
   constructor({ delay = 120, extra = 250 } = {}) {
-    this.delay = delay; this.extra = extra;
+    this.delay = delay; this.base = delay; this.extra = extra;
     this.buf = []; this.off = null; this.last = -1e9;
     this.p = new THREE.Vector3(); this.q = new THREE.Quaternion(); this.s = null; this.ph = 0;
   }

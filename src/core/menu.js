@@ -1,7 +1,8 @@
-// Interstellar menus: one focus-driven menu layer for the start screen, pause, controls, the controller guide, settings and confirmations, driven by keys, pad and mouse, plus the pause controller with pointer lock handling.
+// Interstellar menus: one focus-driven menu layer for the start screen, the co-op lobby (home network or a room code over the internet), pause, controls, the controller guide, settings and confirmations, driven by keys, pad and mouse, plus the pause controller with pointer lock handling.
 import { translate, controlRows, onChange, device, style, padName, CONTROLS, PAD_GUIDE } from './prompts.js';
 import { SPEC } from './settings.js';
 import { caps, escape } from './ui.js';
+import { CODE, cleanCode } from './code.js';
 
 const KEYMAP = { ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down', ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right', Enter: 'select', NumpadEnter: 'select', Space: 'select', Escape: 'back', Backspace: 'back' };
 const REPEAT = { first: 0.38, next: 0.12 };
@@ -146,6 +147,7 @@ export class Menu {
 
   _key(code, e) {
     if (!this.isOpen) { this.onIdleKey?.(code, e); return; }
+    if (this.screen?.onType?.(code, e, this)) { e?.preventDefault?.(); this.render(); return; }
     const a = KEYMAP[code];
     if (!a) return;
     e?.preventDefault?.();
@@ -198,7 +200,7 @@ export class Menu {
 
   _item(it, i) {
     const f = i === this.focus ? ' sel' : '';
-    if (it.kind !== 'setting' || !this.settings) return `<div class="it${f}${it.disabled ? ' dis' : ''}" data-i="${i}">${escape(it.label)}</div>`;
+    if (it.kind !== 'setting' || !this.settings) return `<div class="it${f}${it.disabled ? ' dis' : ''}" data-i="${i}">${escape(typeof it.label === 'function' ? it.label(this) : it.label)}</div>`;
     const spec = this.settings.spec(it.setting), v = this.settings.get(it.setting);
     let val = '';
     if (spec.kind === 'scale') {
@@ -274,21 +276,40 @@ export function confirmScreen({ title, text, yes, no = 'keep playing', onYes, on
   };
 }
 
+const slots = (code, cand = '') => `<div class="code">${Array.from({ length: CODE.length }, (_, i) => (i < code.length ? `<span class="on">${code[i]}</span>` : i === code.length ? `<span class="cur">${cand}</span>` : '<span></span>')).join('')}</div>`;
+
 export function hostScreen(coop, done) {
   const leave = m => { coop.leave(); m.pop(); };
+  const net = () => coop.status().mode === 'net';
   return {
     id: 'host',
     title: 'host a second pilot',
-    items: [{ id: 'begin', label: 'begin', run: () => done('host') }, { id: 'back', label: 'back', run: leave }],
+    items: [
+      { id: 'begin', label: 'begin', run: () => done('host') },
+      { id: 'copy', label: 'copy the invite link', run: m => coop.copy?.().then(ok => m.note(ok ? 'invite link copied' : 'the link could not be copied   read the code out instead')), hidden: () => !net() || !coop.status().open },
+      { id: 'back', label: 'back', run: leave },
+    ],
     body: () => {
       const s = coop.status();
-      const how = s.addresses.length
+      let how;
+      if (s.mode === 'net') how = s.open ? `<div>${escape('the second pilot opens')}</div><div class="addr">${escape(s.site)}</div><div>${escape('chooses join as second pilot and enters')}</div>${slots(s.code)}` : `<div>${escape(s.error === 'down' ? 'no connection to the flight service   check the internet' : 'opening a flight')}</div>`;
+      else how = s.addresses.length
         ? `<div>${escape('on the second computer, in Chrome, open')}</div>${s.addresses.map(a => `<div class="addr">${escape(`http://${a}:${s.port}/`)}</div>`).join('')}<div>${escape('and choose join as second pilot')}</div>`
         : `<div>${escape(s.opening ? 'opening the home network' : 'no home network found   connect this computer to the Wi-Fi')}</div>`;
       return `<div class="lobby">${how}<div class="now">${escape(s.linked ? 'the second pilot is connected' : 'waiting for the second pilot   you can begin and be joined later')}</div></div>`;
     },
-    live: () => { const s = coop.status(); return `${s.opening}|${s.addresses.join()}|${s.linked}`; },
+    live: () => { const s = coop.status(); return `${s.mode}|${s.opening}|${s.addresses.join()}|${s.code}|${s.open}|${s.error}|${s.linked}`; },
     onBack: leave,
+  };
+}
+
+export function hostHowScreen(coop, done) {
+  const go = mode => m => { coop.host(mode); m.push(hostScreen(coop, done)); };
+  return {
+    id: 'host-how',
+    title: 'host a second pilot',
+    text: 'Where is the second pilot?',
+    items: [{ id: 'lan', label: 'on this home network', run: go('lan') }, { id: 'net', label: 'somewhere else   over the internet', run: go('net') }, { id: 'back', label: 'back', run: m => m.back() }],
   };
 }
 
@@ -305,13 +326,51 @@ export function joinScreen(coop, done) {
   };
 }
 
-export function startScreen(menu, { save = false, coop = null } = {}) {
+export function codeScreen(coop, done, initial = '') {
+  const N = CODE.length, L = CODE.letters;
+  let code = cleanCode(initial), sent = '', pick = 0, byPad = false;
+  const sync = () => {
+    if (code.length === N && sent !== code) { if (sent) coop.leave(); sent = code; coop.join(code); }
+    else if (code.length < N && sent) { sent = ''; coop.leave(); }
+  };
+  const add = c => { if (code.length < N && L.includes(c)) { code += c; sync(); } };
+  const erase = () => { code = code.slice(0, -1); sync(); };
+  const leave = m => { if (sent) coop.leave(); sent = ''; m.pop(); };
+  const padView = m => byPad && m.viewDevice() === 'pad';
+  const line = s => (code.length < N ? 'enter the code the first pilot sees' : s.error === 'none' ? 'no flight with this code' : s.error === 'busy' ? 'a second pilot is already aboard' : s.error === 'version' ? 'this copy of the game does not match the host   reload the page' : !s.open ? 'looking for the flight' : !s.linked ? 'waiting for the first pilot' : 'connected   the first pilot starts the journey');
+  sync();
+  return {
+    id: 'code',
+    title: 'join as second pilot',
+    items: [
+      { id: 'go', label: m => (code.length < N && padView(m) ? `add ${L[pick]}` : 'join'), run: m => { if (code.length < N) { if (padView(m)) add(L[pick]); else m.note(`the code has ${N} characters`); } else { sent = ''; coop.leave(); sync(); } m.render(); } },
+      { id: 'back', label: 'back', run: leave },
+    ],
+    body: m => `<div class="lobby">${slots(code, padView(m) ? L[pick] : '')}<div class="now">${escape(line(coop.status()))}</div></div>`,
+    live: m => { const s = coop.status(); if (s.started) done('join'); return `${code}|${pick}|${padView(m)}|${line(s)}`; },
+    onType: (key, e, m) => {
+      if (e?.ctrlKey || e?.metaKey || e?.altKey) return false;
+      if (key === 'Escape') { leave(m); return true; }
+      if (key === 'Backspace') { if (!code.length) return false; erase(); return true; }
+      const c = cleanCode(e?.key?.length === 1 ? e.key : /^(Key|Digit|Numpad)(\w)$/.exec(key)?.[2] || '');
+      if (c.length !== 1) return /^(Key|Digit|Numpad)\w$/.test(key);
+      byPad = false;
+      add(c);
+      return true;
+    },
+    onSide: d => { byPad = true; pick = (pick + d + L.length) % L.length; },
+    onBack: m => { if (code.length) { erase(); m.render(); } else leave(m); },
+    foot: m => (padView(m) || m.viewDevice() === 'pad' ? ['[Adjust] character', '[Select] add', '[Back] erase'] : ['type the code', '[Back] back']),
+  };
+}
+
+export function startScreen(menu, { save = false, coop = null, join = '' } = {}) {
   return new Promise(resolve => {
     let over = false;
     const done = v => { if (over) return; over = true; menu.close(); resolve(v); };
     const crew = coop ? [
-      { id: 'host', label: 'host a second pilot', run: m => { coop.host(); m.push(hostScreen(coop, done)); }, hidden: () => !coop.canHost },
-      { id: 'join', label: 'join as second pilot', run: m => { coop.join(); m.push(joinScreen(coop, done)); } },
+      { id: 'host', label: 'host a second pilot', run: m => { if (coop.lan) m.push(hostHowScreen(coop, done)); else { coop.host('net'); m.push(hostScreen(coop, done)); } }, hidden: () => !coop.canHost },
+      { id: 'join', label: 'join as second pilot', run: m => { if (coop.relay) { coop.join(); m.push(joinScreen(coop, done)); } else m.push(codeScreen(coop, done, coop.remembered?.() || '')); } },
     ] : [];
     const common = [
       ...crew,
@@ -324,6 +383,7 @@ export function startScreen(menu, { save = false, coop = null } = {}) {
       ? { id: 'start', items: [{ id: 'continue', label: 'continue', run: () => done('continue') }, { id: 'new', label: 'begin again', run: m => m.push(confirmScreen({ id: 'confirm-new', title: 'begin again', text: 'The journey recorded so far will be erased.', yes: 'begin again', no: 'back', onYes: () => done('new') })) }, ...common], note: 'headphones recommended', onBack: () => {}, back: false, onStart: () => done('continue'), live }
       : { id: 'start', items: [{ id: 'begin', label: 'begin', run: () => done('begin') }, ...common], note: 'headphones recommended', onBack: () => {}, back: false, onStart: () => done('begin'), live };
     menu.open(root, { bare: true });
+    if (coop && !coop.relay && cleanCode(join).length === CODE.length) { menu.focus = Math.max(0, root.items.findIndex(i => i.id === 'join')); menu.push(codeScreen(coop, done, join)); }
   });
 }
 

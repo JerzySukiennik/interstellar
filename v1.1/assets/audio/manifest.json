@@ -1,0 +1,1008 @@
+{
+ "m_waking": {
+  "file": "music/m_waking.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 40.0,
+  "loopEnd": 165.5,
+  "landmarks": {
+   "nearSilenceUntil": 10,
+   "build": 33,
+   "peak": 153
+  }
+ },
+ "m_release": {
+  "file": "music/m_release.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 79.0,
+  "loopEnd": 173.5,
+  "landmarks": {
+   "pulse": 0,
+   "peak": 183
+  }
+ },
+ "m_gargantua": {
+  "file": "music/m_gargantua.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 125.0,
+  "loopEnd": 218.5,
+  "landmarks": {
+   "swellStart": 137,
+   "peak": 248
+  }
+ },
+ "m_transit": {
+  "file": "music/m_transit.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 50.0,
+  "loopEnd": 234.5,
+  "landmarks": {
+   "build": 15,
+   "peak": 183
+  }
+ },
+ "m_shallows": {
+  "file": "music/m_shallows.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 189.5,
+  "loopEnd": 290.0,
+  "landmarks": {
+   "nearSilenceUntil": 10,
+   "build": 148,
+   "peak": [
+    230,
+    245
+   ]
+  },
+  "loopMatchDb": 0.92
+ },
+ "m_years": {
+  "file": "music/m_years.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 49.5,
+  "loopEnd": 191.0,
+  "landmarks": {
+   "peak": 212
+  },
+  "loopMatchDb": 2.85
+ },
+ "m_horizon": {
+  "file": "music/m_horizon.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 151.5,
+  "loopEnd": 256.5,
+  "landmarks": {
+   "bodyStart": 68,
+   "crescendo": 110,
+   "peak": 137
+  }
+ },
+ "m_lattice": {
+  "file": "music/m_lattice.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "loopStart": 44.0,
+  "loopEnd": 225.5,
+  "landmarks": {
+   "peak": 135
+  }
+ },
+ "m_closing": {
+  "file": "music/m_closing.mp3",
+  "type": "music",
+  "volume": 0.8,
+  "landmarks": {
+   "swellStart": 209,
+   "peak": 263
+  }
+ },
+ "cryo_lid": {
+  "file": "sfx/cryo_lid.mp3",
+  "type": "sfx",
+  "volume": 0.9,
+  "src": [
+   "425090",
+   "457294"
+  ]
+ },
+ "cryo_hiss": {
+  "file": "sfx/cryo_hiss.mp3",
+  "type": "sfx",
+  "volume": 0.7,
+  "src": [
+   "457294"
+  ]
+ },
+ "frost": {
+  "file": "sfx/frost_1.mp3",
+  "type": "sfx",
+  "volume": 0.78,
+  "variants": [
+   "sfx/frost_1.mp3",
+   "sfx/frost_2.mp3",
+   "sfx/frost_3.mp3",
+   "sfx/frost_4.mp3"
+  ],
+  "src": [
+   "168712",
+   "268862",
+   "838106"
+  ]
+ },
+ "tube_strike": {
+  "file": "sfx/tube_strike_1.mp3",
+  "type": "sfx",
+  "volume": 0.82,
+  "variants": [
+   "sfx/tube_strike_1.mp3",
+   "sfx/tube_strike_2.mp3",
+   "sfx/tube_strike_3.mp3"
+  ],
+  "ref": 3,
+  "src": [
+   "145120",
+   "637546"
+  ]
+ },
+ "tube_hum": {
+  "file": "sfx/tube_hum.mp3",
+  "type": "loop",
+  "volume": 0.35,
+  "ref": 2,
+  "src": [
+   "454098"
+  ]
+ },
+ "ring_hum": {
+  "file": "sfx/ring_hum.mp3",
+  "type": "loop",
+  "volume": 0.6,
+  "src": [
+   "353159"
+  ]
+ },
+ "ship_groans": {
+  "file": "sfx/ship_groans.mp3",
+  "type": "loop",
+  "volume": 0.6,
+  "src": [
+   "172411",
+   "474832"
+  ]
+ },
+ "groan": {
+  "file": "sfx/groan_1.mp3",
+  "type": "sfx",
+  "volume": 0.75,
+  "variants": [
+   "sfx/groan_1.mp3",
+   "sfx/groan_2.mp3",
+   "sfx/groan_3.mp3",
+   "sfx/groan_4.mp3",
+   "sfx/groan_5.mp3"
+  ],
+  "ref": 6,
+  "src": [
+   "172411",
+   "481787",
+   "496836",
+   "556714",
+   "878048"
+  ]
+ },
+ "step_metal": {
+  "file": "sfx/step_metal_1.mp3",
+  "type": "sfx",
+  "volume": 0.76,
+  "variants": [
+   "sfx/step_metal_1.mp3",
+   "sfx/step_metal_2.mp3",
+   "sfx/step_metal_3.mp3",
+   "sfx/step_metal_4.mp3"
+  ],
+  "jitter": 0.04,
+  "src": [
+   "398937"
+  ]
+ },
+ "step_pad": {
+  "file": "sfx/step_pad_1.mp3",
+  "type": "sfx",
+  "volume": 0.57,
+  "variants": [
+   "sfx/step_pad_1.mp3",
+   "sfx/step_pad_2.mp3",
+   "sfx/step_pad_3.mp3",
+   "sfx/step_pad_4.mp3"
+  ],
+  "jitter": 0.04,
+  "src": [
+   "234855"
+  ]
+ },
+ "ladder_rung": {
+  "file": "sfx/ladder_rung_1.mp3",
+  "type": "sfx",
+  "volume": 0.6,
+  "variants": [
+   "sfx/ladder_rung_1.mp3",
+   "sfx/ladder_rung_2.mp3",
+   "sfx/ladder_rung_3.mp3",
+   "sfx/ladder_rung_4.mp3"
+  ],
+  "jitter": 0.05,
+  "src": [
+   "463659"
+  ]
+ },
+ "anomaly": {
+  "file": "sfx/anomaly.mp3",
+  "type": "sfx",
+  "volume": 0.8,
+  "src": [
+   "805634"
+  ]
+ },
+ "hatch_servo": {
+  "file": "sfx/hatch_servo_1.mp3",
+  "type": "sfx",
+  "volume": 0.7,
+  "variants": [
+   "sfx/hatch_servo_1.mp3",
+   "sfx/hatch_servo_2.mp3"
+  ],
+  "ref": 3,
+  "src": [
+   "454376"
+  ]
+ },
+ "hatch_hydraulic": {
+  "file": "sfx/hatch_hydraulic.mp3",
+  "type": "sfx",
+  "volume": 0.7,
+  "ref": 3,
+  "src": [
+   "402501"
+  ]
+ },
+ "latch": {
+  "file": "sfx/latch_1.mp3",
+  "type": "sfx",
+  "volume": 0.7,
+  "variants": [
+   "sfx/latch_1.mp3",
+   "sfx/latch_2.mp3",
+   "sfx/latch_3.mp3",
+   "sfx/latch_4.mp3"
+  ],
+  "ref": 2,
+  "src": [
+   "480869"
+  ]
+ },
+ "hub_hum": {
+  "file": "sfx/hub_hum.mp3",
+  "type": "loop",
+  "volume": 0.6,
+  "src": [
+   "543760"
+  ]
+ },
+ "bump_soft": {
+  "file": "sfx/bump_soft_1.mp3",
+  "type": "sfx",
+  "volume": 0.64,
+  "variants": [
+   "sfx/bump_soft_1.mp3",
+   "sfx/bump_soft_2.mp3",
+   "sfx/bump_soft_3.mp3",
+   "sfx/bump_soft_4.mp3"
+  ],
+  "jitter": 0.06,
+  "src": [
+   "745755"
+  ]
+ },
+ "switch_1": {
+  "file": "sfx/switch_1.mp3",
+  "type": "sfx",
+  "volume": 0.6,
+  "src": [
+   "795663"
+  ]
+ },
+ "switch_2": {
+  "file": "sfx/switch_2.mp3",
+  "type": "sfx",
+  "volume": 0.6,
+  "src": [
+   "423957"
+  ]
+ },
+ "switch_3": {
+  "file": "sfx/switch_3.mp3",
+  "type": "sfx",
+  "volume": 0.6,
+  "src": [
+   "815493"
+  ]
+ },
+ "switch_4": {
+  "file": "sfx/switch_4.mp3",
+  "type": "sfx",
+  "volume": 0.6,
+  "src": [
+   "747199"
+  ]
+ },
+ "switch_off": {
+  "file": "sfx/switch_off.mp3",
+  "type": "sfx",
+  "volume": 0.6,
+  "src": [
+   "795663"
+  ]
+ },
+ "button": {
+  "file": "sfx/button.mp3",
+  "type": "sfx",
+  "volume": 0.55,
+  "src": [
+   "556698"
+  ]
+ },
+ "clamp_handle": {
+  "file": "sfx/clamp_handle_1.mp3",
+  "type": "sfx",
+  "volume": 0.74,
+  "variants": [
+   "sfx/clamp_handle_1.mp3",
+   "sfx/clamp_handle_2.mp3",
+   "sfx/clamp_handle_3.mp3"
+  ],
+  "src": [
+   "676412"
+  ]
+ },
+ "avionics_boot": {
+  "file": "sfx/avionics_boot_1.mp3",
+  "type": "sfx",
+  "volume": 0.45,
+  "variants": [
+   "sfx/avionics_boot_1.mp3",
+   "sfx/avionics_boot_2.mp3",
+   "sfx/avionics_boot_3.mp3"
+  ],
+  "src": [
+   "125400"
+  ]
+ },
+ "beep": {
+  "file": "sfx/beep_1.mp3",
+  "type": "sfx",
+  "volume": 0.49,
+  "variants": [
+   "sfx/beep_1.mp3",
+   "sfx/beep_2.mp3",
+   "sfx/beep_3.mp3"
+  ],
+  "src": [
+   "188383",
+   "536422",
+   "540902"
+  ]
+ },
+ "beep_double": {
+  "file": "sfx/beep_double.mp3",
+  "type": "sfx",
+  "volume": 0.35,
+  "src": [
+   "607943"
+  ]
+ },
+ "cockpit_tone": {
+  "file": "sfx/cockpit_tone.mp3",
+  "type": "loop",
+  "volume": 0.45,
+  "src": [
+   "349689"
+  ]
+ },
+ "clamp_release": {
+  "file": "sfx/clamp_release_1.mp3",
+  "type": "sfx",
+  "volume": 1.59,
+  "variants": [
+   "sfx/clamp_release_1.mp3",
+   "sfx/clamp_release_2.mp3"
+  ],
+  "src": [
+   "264060",
+   "406493"
+  ]
+ },
+ "docking_latch": {
+  "file": "sfx/docking_latch_1.mp3",
+  "type": "sfx",
+  "volume": 0.98,
+  "variants": [
+   "sfx/docking_latch_1.mp3",
+   "sfx/docking_latch_2.mp3",
+   "sfx/docking_latch_3.mp3"
+  ],
+  "src": [
+   "154447",
+   "383807"
+  ]
+ },
+ "rcs": {
+  "file": "sfx/rcs_1.mp3",
+  "type": "sfx",
+  "volume": 0.92,
+  "variants": [
+   "sfx/rcs_1.mp3",
+   "sfx/rcs_2.mp3",
+   "sfx/rcs_3.mp3"
+  ],
+  "jitter": 0.06,
+  "src": [
+   "753138",
+   "825617"
+  ]
+ },
+ "ranger_engines": {
+  "file": "sfx/ranger_engines.mp3",
+  "type": "loop",
+  "volume": 0.85,
+  "src": [
+   "341005",
+   "522618",
+   "613855",
+   "849833",
+   "849949",
+   "853296"
+  ]
+ },
+ "engine_spool": {
+  "file": "sfx/engine_spool.mp3",
+  "type": "sfx",
+  "volume": 0.85,
+  "src": [
+   "341005",
+   "613855",
+   "849833",
+   "853296"
+  ]
+ },
+ "entry_rumble": {
+  "file": "sfx/entry_rumble.mp3",
+  "type": "loop",
+  "volume": 0.8,
+  "src": [
+   "203281"
+  ]
+ },
+ "buffet": {
+  "file": "sfx/buffet.mp3",
+  "type": "loop",
+  "volume": 0.6,
+  "src": [
+   "678418"
+  ]
+ },
+ "wind": {
+  "file": "sfx/wind.mp3",
+  "type": "loop",
+  "volume": 0.6,
+  "src": [
+   "167684"
+  ]
+ },
+ "wind_strong": {
+  "file": "sfx/wind_strong.mp3",
+  "type": "loop",
+  "volume": 0.7,
+  "src": [
+   "167684"
+  ]
+ },
+ "water_lap": {
+  "file": "sfx/water_lap.mp3",
+  "type": "loop",
+  "volume": 0.5,
+  "src": [
+   "636202"
+  ]
+ },
+ "touchdown_water": {
+  "file": "sfx/touchdown_water.mp3",
+  "type": "sfx",
+  "volume": 0.9,
+  "src": [
+   "203281",
+   "529794"
+  ]
+ },
+ "splash_big": {
+  "file": "sfx/splash_big_1.mp3",
+  "type": "sfx",
+  "volume": 1.04,
+  "variants": [
+   "sfx/splash_big_1.mp3",
+   "sfx/splash_big_2.mp3"
+  ],
+  "src": [
+   "529794",
+   "676380"
+  ]
+ },
+ "wade_step": {
+  "file": "sfx/wade_step_1.mp3",
+  "type": "sfx",
+  "volume": 1.13,
+  "variants": [
+   "sfx/wade_step_1.mp3",
+   "sfx/wade_step_2.mp3",
+   "sfx/wade_step_3.mp3",
+   "sfx/wade_step_4.mp3",
+   "sfx/wade_step_5.mp3",
+   "sfx/wade_step_6.mp3"
+  ],
+  "jitter": 0.04,
+  "src": [
+   "342932"
+  ]
+ },
+ "tick": {
+  "file": "sfx/tick.mp3",
+  "type": "sfx",
+  "volume": 0.6,
+  "src": [
+   "534094"
+  ]
+ },
+ "beacon_ping": {
+  "file": "sfx/beacon_ping.mp3",
+  "type": "sfx",
+  "volume": 0.5,
+  "ref": 8,
+  "src": [
+   "808185"
+  ]
+ },
+ "wave_rumble": {
+  "file": "sfx/wave_rumble.mp3",
+  "type": "loop",
+  "volume": 0.9,
+  "src": [
+   "203281",
+   "870557"
+  ]
+ },
+ "wave_near": {
+  "file": "sfx/wave_near.mp3",
+  "type": "loop",
+  "volume": 0.9,
+  "src": [
+   "859143"
+  ]
+ },
+ "wave_hit": {
+  "file": "sfx/wave_hit.mp3",
+  "type": "sfx",
+  "volume": 1.0,
+  "src": [
+   "529794",
+   "678418",
+   "859143"
+  ]
+ },
+ "engine_flood": {
+  "file": "sfx/engine_flood_1.mp3",
+  "type": "sfx",
+  "volume": 0.7,
+  "variants": [
+   "sfx/engine_flood_1.mp3",
+   "sfx/engine_flood_2.mp3"
+  ],
+  "src": [
+   "437744"
+  ]
+ },
+ "engine_drain": {
+  "file": "sfx/engine_drain.mp3",
+  "type": "sfx",
+  "volume": 0.7,
+  "src": [
+   "184304"
+  ]
+ },
+ "alarm": {
+  "file": "sfx/alarm.mp3",
+  "type": "loop",
+  "volume": 0.45,
+  "src": [
+   "412197"
+  ]
+ },
+ "alarm_short": {
+  "file": "sfx/alarm_short.mp3",
+  "type": "sfx",
+  "volume": 0.5,
+  "src": [
+   "412197"
+  ]
+ },
+ "warn_beep": {
+  "file": "sfx/warn_beep.mp3",
+  "type": "sfx",
+  "volume": 0.4,
+  "src": [
+   "742645"
+  ]
+ },
+ "canopy_crack": {
+  "file": "sfx/canopy_crack_1.mp3",
+  "type": "sfx",
+  "volume": 0.98,
+  "variants": [
+   "sfx/canopy_crack_1.mp3",
+   "sfx/canopy_crack_2.mp3"
+  ],
+  "src": [
+   "422623",
+   "610933"
+  ]
+ },
+ "breath_calm": {
+  "file": "sfx/breath_calm.mp3",
+  "type": "loop",
+  "volume": 0.45,
+  "src": [
+   "426297"
+  ]
+ },
+ "breath_stress": {
+  "file": "sfx/breath_stress.mp3",
+  "type": "loop",
+  "volume": 0.5,
+  "src": [
+   "426298"
+  ]
+ },
+ "radio": {
+  "file": "sfx/radio_1.mp3",
+  "type": "sfx",
+  "volume": 0.5,
+  "variants": [
+   "sfx/radio_1.mp3",
+   "sfx/radio_2.mp3"
+  ],
+  "src": [
+   "524205",
+   "760245"
+  ]
+ },
+ "heartbeat": {
+  "file": "sfx/heartbeat.mp3",
+  "type": "loop",
+  "volume": 0.6,
+  "src": [
+   "332821"
+  ]
+ },
+ "lattice_resonance": {
+  "file": "sfx/lattice_resonance.mp3",
+  "type": "loop",
+  "volume": 0.6,
+  "src": [
+   "256950",
+   "436678",
+   "573805"
+  ]
+ },
+ "resonance": {
+  "file": "sfx/resonance_1.mp3",
+  "type": "sfx",
+  "volume": 0.73,
+  "variants": [
+   "sfx/resonance_1.mp3",
+   "sfx/resonance_2.mp3",
+   "sfx/resonance_3.mp3",
+   "sfx/resonance_4.mp3",
+   "sfx/resonance_5.mp3"
+  ],
+  "src": [
+   "197302",
+   "256950",
+   "436678",
+   "573805",
+   "711891"
+  ]
+ },
+ "push": {
+  "file": "sfx/push.mp3",
+  "type": "sfx",
+  "volume": 1.0,
+  "src": [
+   "826217"
+  ]
+ },
+ "main_engine_ignite": {
+  "file": "sfx/main_engine_ignite.mp3",
+  "type": "sfx",
+  "volume": 0.9,
+  "src": [
+   "321899",
+   "522618",
+   "613855",
+   "849833",
+   "853296",
+   "nasa_cs1"
+  ]
+ },
+ "main_engine": {
+  "file": "sfx/main_engine.mp3",
+  "type": "loop",
+  "volume": 0.9,
+  "engine": {
+   "ignite": "main_engine_ignite",
+   "shutdown": "main_engine_shutdown",
+   "handoverAt": 13.9,
+   "loopOffset": 0.5,
+   "xf": 1.5,
+   "rate": [
+    0.97,
+    1.03
+   ],
+   "lowpass": [
+    380,
+    6000
+   ],
+   "volume": [
+    0.35,
+    1.0
+   ]
+  },
+  "src": [
+   "522618",
+   "613855",
+   "849833",
+   "853296",
+   "nasa_cs1"
+  ]
+ },
+ "main_engine_shutdown": {
+  "file": "sfx/main_engine_shutdown.mp3",
+  "type": "sfx",
+  "volume": 0.9,
+  "src": [
+   "522618",
+   "613855",
+   "849833",
+   "853296",
+   "nasa_cs1"
+  ]
+ },
+ "eject_blast": {
+  "file": "sfx/eject_blast.mp3",
+  "type": "sfx",
+  "volume": 1.0,
+  "src": [
+   "172983",
+   "71274",
+   "88495"
+  ]
+ },
+ "decompression": {
+  "file": "sfx/decompression_1.mp3",
+  "type": "sfx",
+  "volume": 0.9,
+  "variants": [
+   "sfx/decompression_1.mp3",
+   "sfx/decompression_2.mp3"
+  ],
+  "src": [
+   "429911",
+   "88495"
+  ]
+ },
+ "_groups": {
+  "awakening": [
+   "m_waking",
+   "cryo_lid",
+   "cryo_hiss",
+   "frost",
+   "tube_strike",
+   "tube_hum",
+   "ring_hum",
+   "hub_hum",
+   "anomaly",
+   "hatch_servo",
+   "hatch_hydraulic",
+   "latch",
+   "button",
+   "step_metal",
+   "step_pad",
+   "ladder_rung",
+   "bump_soft",
+   "breath_calm",
+   "heartbeat",
+   "groan"
+  ],
+  "cockpit": [
+   "m_release",
+   "hub_hum",
+   "hatch_servo",
+   "switch_1",
+   "switch_2",
+   "switch_3",
+   "switch_4",
+   "switch_off",
+   "button",
+   "beep",
+   "beep_double",
+   "avionics_boot",
+   "cockpit_tone",
+   "clamp_handle",
+   "clamp_release",
+   "latch",
+   "rcs",
+   "bump_soft",
+   "alarm",
+   "alarm_short",
+   "warn_beep",
+   "engine_spool",
+   "breath_calm",
+   "main_engine",
+   "main_engine_ignite",
+   "main_engine_shutdown"
+  ],
+  "flight": [
+   "m_release",
+   "m_gargantua",
+   "m_transit",
+   "buffet",
+   "entry_rumble",
+   "docking_latch",
+   "hatch_servo",
+   "switch_1",
+   "switch_2",
+   "switch_3",
+   "switch_4",
+   "switch_off",
+   "button",
+   "beep",
+   "beep_double",
+   "avionics_boot",
+   "cockpit_tone",
+   "clamp_handle",
+   "clamp_release",
+   "latch",
+   "rcs",
+   "bump_soft",
+   "alarm",
+   "alarm_short",
+   "warn_beep",
+   "engine_spool",
+   "breath_calm",
+   "main_engine",
+   "main_engine_ignite",
+   "main_engine_shutdown"
+  ],
+  "miller": [
+   "m_shallows",
+   "tick",
+   "wind",
+   "wind_strong",
+   "water_lap",
+   "wade_step",
+   "splash_big",
+   "touchdown_water",
+   "wave_rumble",
+   "wave_near",
+   "wave_hit",
+   "beacon_ping",
+   "engine_flood",
+   "engine_drain",
+   "ranger_engines",
+   "buffet",
+   "entry_rumble",
+   "breath_stress",
+   "heartbeat",
+   "radio",
+   "hatch_servo",
+   "hatch_hydraulic",
+   "step_metal",
+   "switch_1",
+   "switch_2",
+   "switch_3",
+   "switch_4",
+   "switch_off",
+   "button",
+   "beep",
+   "beep_double",
+   "avionics_boot",
+   "cockpit_tone",
+   "clamp_handle",
+   "clamp_release",
+   "latch",
+   "rcs",
+   "bump_soft",
+   "alarm",
+   "alarm_short",
+   "warn_beep",
+   "engine_spool",
+   "breath_calm",
+   "main_engine",
+   "main_engine_ignite",
+   "main_engine_shutdown"
+  ],
+  "years": [
+   "m_years",
+   "ring_hum",
+   "hub_hum",
+   "ship_groans",
+   "groan",
+   "radio",
+   "hatch_servo",
+   "hatch_hydraulic",
+   "latch",
+   "button",
+   "step_metal",
+   "step_pad",
+   "ladder_rung",
+   "bump_soft",
+   "breath_calm",
+   "frost"
+  ],
+  "dive": [
+   "m_horizon",
+   "canopy_crack",
+   "breath_stress",
+   "heartbeat",
+   "buffet",
+   "entry_rumble",
+   "eject_blast",
+   "decompression",
+   "switch_1",
+   "switch_2",
+   "switch_3",
+   "switch_4",
+   "switch_off",
+   "button",
+   "beep",
+   "beep_double",
+   "avionics_boot",
+   "cockpit_tone",
+   "clamp_handle",
+   "clamp_release",
+   "latch",
+   "rcs",
+   "bump_soft",
+   "alarm",
+   "alarm_short",
+   "warn_beep",
+   "engine_spool",
+   "breath_calm",
+   "main_engine",
+   "main_engine_ignite",
+   "main_engine_shutdown"
+  ],
+  "tesseract": [
+   "m_lattice",
+   "m_closing",
+   "lattice_resonance",
+   "resonance",
+   "push",
+   "breath_calm",
+   "heartbeat"
+  ]
+ }
+}

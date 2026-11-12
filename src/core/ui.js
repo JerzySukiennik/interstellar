@@ -79,6 +79,10 @@ export const CSS = `
 #ui-menu .lobby { max-width: 44em; text-align: center; font-size: calc(11px * var(--k)); letter-spacing: 0.1em; line-height: 1.9; color: rgba(255,255,255,0.8); margin: calc(-10px * var(--k)) 0 calc(24px * var(--k)); white-space: pre-wrap; }
 #ui-menu .lobby .addr { font-size: calc(16px * var(--k)); letter-spacing: 0.06em; color: rgba(255,255,255,1); margin: calc(4px * var(--k)) 0; user-select: text; }
 #ui-menu .lobby .now { margin-top: calc(14px * var(--k)); color: rgba(255,255,255,0.95); }
+#ui-menu .lobby .code { display: flex; justify-content: center; gap: calc(9px * var(--k)); margin: calc(10px * var(--k)) 0 calc(4px * var(--k)); font-size: calc(24px * var(--k)); letter-spacing: 0; line-height: 1.5; color: rgba(255,255,255,1); user-select: text; }
+#ui-menu .lobby .code span { display: block; width: 1.25em; height: 1.5em; border-bottom: 1px solid rgba(255,255,255,0.3); }
+#ui-menu .lobby .code span.on { border-bottom-color: rgba(255,255,255,0.75); }
+#ui-menu .lobby .code span.cur { border-bottom-color: rgba(255,255,255,1); color: rgba(255,255,255,0.5); }
 #ui-menu .note { min-height: calc(18px * var(--k)); margin-top: calc(14px * var(--k)); font-size: calc(9.5px * var(--k)); letter-spacing: 0.2em; color: rgba(255,255,255,0.62); text-align: center; }
 #ui-menu .tabs { display: flex; gap: calc(26px * var(--k)); margin-bottom: calc(18px * var(--k)); }
 #ui-menu .tab { font-size: calc(9.5px * var(--k)); letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,255,255,0.46); cursor: pointer; padding: calc(4px * var(--k)) 0; white-space: nowrap; }

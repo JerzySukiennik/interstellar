@@ -1,4 +1,4 @@
-// Interstellar co-op session (ctx.net): roles, shared facts, the partner's body and ship drawn from buffered network poses, the host's clock and world state, chapter gates and chapter follow.
+// Interstellar co-op session (ctx.net) over either link (the home relay or the internet room): roles, shared facts, the partner's body and ship drawn from buffered network poses, the host's clock and world state, chapter gates and chapter follow.
 import * as THREE from 'three';
 import { Link, Track, PROTOCOL, wall, rid } from './net.js';
 
@@ -42,7 +42,7 @@ export function bodyOf(c, time = 0, out = BODY) {
 }
 
 export class Coop {
-  constructor(ctx, { base = '', role = 'host', fetch: f, gateLimit = 45, id } = {}) {
+  constructor(ctx, { base = '', role = 'host', fetch: f, gateLimit = 45, id, link = null } = {}) {
     this.ctx = ctx;
     this.role = role;
     this.host = role === 'host';
@@ -54,7 +54,7 @@ export class Coop {
     this.gateLimit = gateLimit;
     this.linked = false; this.everLinked = false; this.synced = false;
     this.facts = new Map(); this.n = 0; this.listeners = new Set();
-    this.link = new Link({ base, role, fetch: f, id });
+    this.link = link || new Link({ base, role, fetch: f, id });
     this.tracks = { body: new Track({ delay: 130 }), ship: new Track({ delay: 110 }) };
     this.world = null;
     this.st = null; this.shares = []; this.avatars = new Map();
@@ -166,6 +166,8 @@ export class Coop {
     const L = this.link, now = wall();
     this.time += dt;
     L.tick();
+    const lag = L.lag || 0;
+    for (const T of [this.tracks.body, this.tracks.ship]) if (T.delay !== T.base + lag) T.delay += (T.base + lag - T.delay) * Math.min(1, Math.max(0, dt) * 1.2 + 0.02);
     this._drain();
     const linked = L.open && L.peer && this.synced;
     if (linked !== this.linked) this._setLinked(linked);
